@@ -14,7 +14,13 @@ def open_data(filename):
     file=pd.read_csv(filename,sep=",",header=0)
     #Turn the DataFrame into a np.array matrix
     data=np.array(file)
+    #creates dataset with only prisonername and eyecolor 
     dataset=np.array((data[:,0],data[:,5])).T
+    
+    #adds .jpg to prisonername, so that it is equal to filename
+    for i in range(len(data[:,0])):
+        dataset[i,0]=dataset[i,0]+".jpg"
+        
     return dataset
 
 
