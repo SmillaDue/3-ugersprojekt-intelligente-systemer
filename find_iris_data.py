@@ -3,6 +3,8 @@ import numpy as np
 import cv2
 from shape_to_np import shape_to_np
 
+#VÆR OPMÆRKSOM PÅ AT FUNKTIONEN KUN VIRKER, HVIS BILLEDFILERNE LIGGER I SAMME MAPPE SOM find_iris_data.py 
+
 def find_iris_data(image):
         
     #renaming functions that finds the face and finds specific parts of face
