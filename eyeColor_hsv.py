@@ -10,39 +10,38 @@ import cv2
 import dlib
 from find_iris_data import find_iris_data
 import colorsys
+import matplotlib as plt
+
+
 
 def eyeColor_hsv(image):
     #finds iris in image
     img=find_iris_data(image)
     
     #converts pixels of rgb to csv
-    hsv=cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
+    hsv=cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     numbers=[]
     
     #counts number of pixels in the different ranges of colors and appends to empty list
-    Blue=(166, 21, 50), (240, 100, 85)
-    numbers.append(np.count_nonzero(cv2.inRange(hsv, Blue[0], Blue[1])))
     
-    BlueGray=(166, 2, 25), (300, 20, 75)
-    numbers.append(np.count_nonzero(cv2.inRange(hsv, BlueGray[0], BlueGray[1])))
-    
-    Brown=(2, 20, 20), (40, 100, 60)
+    Brown=(9, 4, 0), (30, 255, 125)
     numbers.append(np.count_nonzero(cv2.inRange(hsv, Brown[0], Brown[1])))
     
-    BrownGray=(20, 3, 30), (65, 60, 60)
-    numbers.append(np.count_nonzero(cv2.inRange(hsv, BrownGray[0], BrownGray[1])))
-    
-    BrownBlack=(0, 10, 5), (40, 40, 25)
-    numbers.append(np.count_nonzero(cv2.inRange(hsv, BrownBlack[0], BrownBlack[1])))
-    
-    Green=(60, 21, 50), (165, 100, 85)
+
+    Green=(75, 0, 60), (100, 200, 217)
     numbers.append(np.count_nonzero(cv2.inRange(hsv, Green[0], Green[1])))
     
-    GreenGray=(60, 2, 25), (165, 20, 65)
-    numbers.append(np.count_nonzero(cv2.inRange(hsv, GreenGray[0], GreenGray[1])))
+
+    Blue=(114, 7, 77), (164, 164, 206)
+    numbers.append(np.count_nonzero(cv2.inRange(hsv, Blue[0], Blue[1])))
     
+    BLight=(0, 7, 58), (30, 255, 255)
+    numbers.append(np.count_nonzero(cv2.inRange(hsv, BLight[0], BLight[1])))
     
-    colors=(["Blue","BlueGray","Brown", "BrwonGray", "BrownBlack", "Green", "GreenGray"])
+    #print(np.count_nonzero(hsv))
+    #print(numbers)
+    
+    colors=(["Brown","Hazel","Green", "Blue", "BLight"])
     #combines the count of pixels in a category to the category
     count=np.array((numbers,colors))
     
@@ -53,6 +52,9 @@ def eyeColor_hsv(image):
     dominantColor=colors[np.where(count==maxi)[1][0]]
     
     return dominantColor
+
+
+
 
 
 """
