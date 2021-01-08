@@ -24,24 +24,24 @@ def eyeColor_hsv(image):
     
     #counts number of pixels in the different ranges of colors and appends to empty list
     
-    Brown=(9, 4, 0), (30, 255, 125)
+    Brown=(10, 70, 0), (22, 255, 206)
     numbers.append(np.count_nonzero(cv2.inRange(hsv, Brown[0], Brown[1])))
-    
 
-    Green=(75, 0, 60), (100, 200, 217)
+    Green=(20, 0, 42), (123, 232, 180)
     numbers.append(np.count_nonzero(cv2.inRange(hsv, Green[0], Green[1])))
-    
 
-    Blue=(114, 7, 77), (164, 164, 206)
+    Blue=(120, 0, 0), (160, 100, 180)
     numbers.append(np.count_nonzero(cv2.inRange(hsv, Blue[0], Blue[1])))
     
-    BLight=(0, 7, 58), (30, 255, 255)
-    numbers.append(np.count_nonzero(cv2.inRange(hsv, BLight[0], BLight[1])))
+    BLight1=(150, 60, 0), (179, 255, 170)
+    Blight1=np.count_nonzero(cv2.inRange(hsv, BLight1[0], BLight1[1]))
     
+    BLight2=(0, 100, 50), (6, 255, 110)
+    numbers.append(Blight1+np.count_nonzero(cv2.inRange(hsv, BLight2[0], BLight2[1])))
     #print(np.count_nonzero(hsv))
     #print(numbers)
     
-    colors=(["Brown","Hazel","Green", "Blue", "BLight"])
+    colors=(["Brown","Green","Blue", "Bad lighting"])
     #combines the count of pixels in a category to the category
     count=np.array((numbers,colors))
     
