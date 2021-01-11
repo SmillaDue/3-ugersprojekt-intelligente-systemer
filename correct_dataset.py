@@ -26,7 +26,15 @@ def correct_dataset(data, file):
         #creates array with row-number of repeated pictures   
         correct=np.asarray(np.where(dataset[:,0]==result[i]))[0]
         lines[correct]=True
+    Gray=np.where(dataset[:,1]=='Gray')[0]
+    lines[Gray]=False
+    Maroon=np.where(dataset[:,1]=='Maroon')[0]
+    lines[Maroon]=False
     dataset=dataset[lines]
+    Black=np.where(dataset[:,1]=='Black')[0]
+    dataset[Black,1]='Brown'
+    Hazel=np.where(dataset[:,1]=='Hazel')[0]
+    dataset[Hazel,1]='Green'
     return dataset
 
 #labels_utf8.csv
