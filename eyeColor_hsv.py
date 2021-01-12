@@ -23,25 +23,37 @@ def eyeColor_hsv(image):
     numbers=[]
     
     #counts number of pixels in the different ranges of colors and appends to empty list
-    
-    Brown=(10, 70, 0), (22, 255, 206)
+
+   
+    Brown=(0, 80, 0), (25, 255, 130)
     numbers.append(np.count_nonzero(cv2.inRange(hsv, Brown[0], Brown[1])))
 
-    Green=(20, 0, 42), (123, 232, 180)
+    Green=(6, 0, 50), (105, 55, 162)
     numbers.append(np.count_nonzero(cv2.inRange(hsv, Green[0], Green[1])))
 
-    Blue=(120, 0, 0), (160, 100, 180)
+    Blue=(107, 40, 40), (136, 255, 255)
     numbers.append(np.count_nonzero(cv2.inRange(hsv, Blue[0], Blue[1])))
     
-    BLight1=(150, 60, 0), (179, 255, 170)
-    Blight1=np.count_nonzero(cv2.inRange(hsv, BLight1[0], BLight1[1]))
     
-    BLight2=(0, 100, 50), (6, 255, 110)
-    numbers.append(Blight1+np.count_nonzero(cv2.inRange(hsv, BLight2[0], BLight2[1])))
-    #print(np.count_nonzero(hsv))
-    #print(numbers)
+    #BLight1=(170, 60, 0), (179, 255, 170)
+    #Blight1=np.count_nonzero(cv2.inRange(hsv, BLight1[0], BLight1[1]))
+    BLight2=(0, 115, 0), (10, 255, 255)
+    BLight=np.count_nonzero(cv2.inRange(hsv, BLight2[0], BLight2[1]))
+    White=(0,0,255),(179,255,255)
+    whitePix=np.count_nonzero(cv2.inRange(hsv, White[0], White[1]))
     
-    colors=(["Brown","Green","Blue", "Bad lighting"])
+    if whitePix>10 and numbers[0]>numbers[1]:
+        numbers[2]=numbers[2]/2
+    
+    if (np.count_nonzero(hsv)-3*BLight)<0:
+        dominantColor='Bad lighting'
+        
+    print(np.count_nonzero(hsv))
+    print(numbers)
+    print(whitePix)
+    #print(BLight)
+    
+    colors=(["Brown","Green","Blue"])
     #combines the count of pixels in a category to the category
     count=np.array((numbers,colors))
     
@@ -53,34 +65,5 @@ def eyeColor_hsv(image):
     
     return dominantColor
 
-
-
-
-
-"""
-count=np.array((numbers,colors)).T
-countsorted=sorted(count, key=lambda tup: tup[0])
-
-
-for i in range(7):
-    np.count_nonzero(cv2.inRange(hsv, ((166, 21, 50), (240, 100, 85))))
-    
-    
-    
-hsv=cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
-img = cv2.inRange(hsv, ((166, 21, 50), (240, 100, 85)))
-np.count_nonzero(blue)
-
-
-
-#go from rgb to hsv
-hsv=cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
-#as a vector
-pixelhsv=np.float32(hsv.reshape(-1, 3))
-
-
-blue = cv2.inRange(hsv, ((166, 21, 50), (240, 100, 85)))
-
-np.count_nonzero(blue)
-
-"""
+    #lower_blue = np.array([110,50,50])
+    #upper_blue = np.array([130,255,255])
